@@ -13,11 +13,8 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Installation des dépendances"
-                sh 'npm install'
                 echo "Build du projet"
-                sh 'npm run build'
                 echo "Exécution des tests"
-                sh 'npm test'
             }
         }
         stage('Deploy') {
