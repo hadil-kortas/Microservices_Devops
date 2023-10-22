@@ -1,4 +1,4 @@
-/*// bookSchema.js
+// bookSchema.js
 const { buildSchema } = require('graphql');
 // Créer un schéma GraphQL
 const bookSchema = buildSchema(` 
@@ -19,4 +19,4 @@ author: String
 publicationYear: Int
 }
 `);
-module.exports = bookSchema;*/
+module.exports = bookSchema;
