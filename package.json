@@ -4,8 +4,7 @@
   "description": "A simple microservices with REST and et GraphQL architectures using node js as a framework and SQLite as a database # Usage books-service/ customers-service/ orders-service :",
   "main": "index.js",
   "scripts": {
-    "test": "npm test",
-    "start": "node server.js"
+    "test": "npm test"
   },
   "repository": {
     "type": "git",
