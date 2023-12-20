@@ -16,25 +16,25 @@ pipeline {
                     echo "Navigate to the api-gateway directory and start the server"
                     dir('api-gateway') {
                         sh 'npm install'
-                        sh 'npm start &'
+                        sh 'node server.js &'
                     }
 
                     echo "Navigate to the books-service directory and start the server"
                     dir('books-service') {
                         sh 'npm install'
-                        sh 'npm start &'
+                        sh 'node server.js &'
                     }
 
                     echo "Navigate to the customers-service directory and start the server"
                     dir('customers-service') {
                         sh 'npm install'
-                        sh 'npm start &'
+                        sh 'node server.js &'
                     }
 
                     echo "Navigate to the orders-service directory and start the server"
                     dir('orders-service') {
                         sh 'npm install'
-                        sh 'npm start &'
+                        sh 'node server.js &'
                     }
                 }
             }
@@ -45,7 +45,6 @@ pipeline {
                     echo "Stopping background processes"
                     sh 'pkill -f "node server.js"'
                 }
-
             }
         }
     }
