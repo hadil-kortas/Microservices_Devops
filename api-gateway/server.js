@@ -5,7 +5,7 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
 const routes = {
     '/customers': 'http://localhost:5001',
     '/orders': 'http://localhost:5002',
-    //'/books': 'http://localhost:5000'
+    '/books': 'http://localhost:5000'
 };
 
 // create a proxy for each route 
