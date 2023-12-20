@@ -218,7 +218,14 @@ node server.js
 ```
 
 
-
+echo "Install node modules"
+npm install
+npm test
+npm run migrate
+npm start
+cd api-gateway
+npm install
+npm start
 
 
 
