@@ -45,29 +45,6 @@ pipeline {
                     echo "Stopping background processes"
                     sh 'pkill -f "node server.js"'
                 }
-                script {
-                    echo "Building and pushing Docker images"
-                    dir('api-gateway') {
-                        sh 'docker build -t my-registry/api-gateway .'
-                        sh 'docker push my-registry/api-gateway'
-                    }
-                    dir('books-service') {
-                        sh 'docker build -t my-registry/books-service .'
-                        sh 'docker push my-registry/books-service'
-                    }
-                    dir('customers-service') {
-                        sh 'docker build -t my-registry/customers-service .'
-                        sh 'docker push my-registry/customers-service'
-                    }
-                    dir('orders-service') {
-                        sh 'docker build -t my-registry/orders-service .'
-                        sh 'docker push my-registry/orders-service'
-                    }
-
-
-
-                }
-
 
             }
         }
