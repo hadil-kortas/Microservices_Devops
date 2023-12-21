@@ -7,48 +7,41 @@ pipeline {
         pollSCM('*/5 * * * *')
     }
     stages {
-        stage('Checkout') {
-            steps {
-                echo "Récupération du code source"
-                checkout scm
-            }
+        stage('Checkout'){
+        agent any
+        steps{
+            checkout scm
         }
-        stage('Build') {
-            steps {
-                script {
-                    echo "Navigate to the api-gateway directory and start the server"
-                    dir('api-gateway') {
-                        sh 'npm install'
-                        sh 'node server.js &'
-                    }
-
-                    echo "Navigate to the books-service directory and start the server"
-                    dir('books-service') {
-                        sh 'npm install'
-                        sh 'node server.js &'
-                    }
-
-                    echo "Navigate to the customers-service directory and start the server"
-                    dir('customers-service') {
-                        sh 'npm install'
-                        sh 'node server.js &'
-                    }
-
-                    echo "Navigate to the orders-service directory and start the server"
-                    dir('orders-service') {
-                        sh 'npm install'
-                        sh 'node server.js &'
-                    }
-                }
-            }
         }
-        stage('Deploy') {
-            steps {
-                script {
-                    echo "Stopping background processes"
-                    sh 'pkill -f "node server.js"'
-                }
-            }
+        stage('Init'){
+        steps{
+            sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
         }
-    }
+        }
+        stage('Build'){
+        steps {
+            sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/api-gateway:$BUILD_ID .'
+            sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/books-server:$BUILD_ID .'
+            sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/customers-server:$BUILD_ID .'
+            sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/orders-service:$BUILD_ID .'
+        }
+        }
+        stage('Deliver'){
+        steps {
+            sh 'docker push $DOCKERHUB_CREDENTIALS_USR/api-gateway:$BUILD_ID'
+            sh 'docker push $DOCKERHUB_CREDENTIALS_USR/books-server:$BUILD_ID'
+            sh 'docker push $DOCKERHUB_CREDENTIALS_USR/customers-server:$BUILD_ID'
+            sh 'docker push $DOCKERHUB_CREDENTIALS_USR/orders-server:$BUILD_ID'
+        }
+        }
+        stage('Cleanup'){
+        steps {
+            sh 'docker rmi $DOCKERHUB_CREDENTIALS_USR/api-gateway:$BUILD_ID'
+            sh 'docker rmi $DOCKERHUB_CREDENTIALS_USR/books-service:$BUILD_ID'
+            sh 'docker rmi $DOCKERHUB_CREDENTIALS_USR/customers-service:$BUILD_ID'
+            sh 'docker rmi $DOCKERHUB_CREDENTIALS_USR/orders-service:$BUILD_ID'
+            sh 'docker logout'
+        }
+        }
+}
 }
