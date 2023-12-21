@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  api-gateway:
+    image: hadilkortas/api-gateway
+    ports:
+      - "8081:5003"
+
+  books-service:
+    image: hadilkortas/books-service
+    ports:
+      - "8082:5000"
+    depends_on:
+      - api-gateway
+
+  customers-service:
+    image: hadilkortas/customers-service
+    ports:
+      - "8083:5001"
+    depends_on:
+      - api-gateway
+
+  orders-service:
+    image: hadilkortas/orders-service
+    ports:
+      - "8084:5002"
+    depends_on:
+      - api-gateway
