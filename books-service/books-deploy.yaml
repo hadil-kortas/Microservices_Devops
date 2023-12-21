@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: books
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: books
+  template:
+    metadata:
+      labels:
+        app: books
+    spec:
+      containers:
+      - name: books
+        image: hadilkortas/books-service
+        ports:
+        - containerPort: 5000

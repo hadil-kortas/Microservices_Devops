@@ -15,6 +15,12 @@ for(const route in routes){
     app.use(route, createProxyMiddleware({target}));
 }
 
+// handler for the root endpoint
+app.get('/', (req, res) => {
+    res.send('Welcome to the API Gateway!');
+});
+
+
 // start the proxy
 const PORT = 5003;
 app.listen(PORT, () => {

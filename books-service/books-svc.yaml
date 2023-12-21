@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: books
+  labels:
+      app: books
+spec:
+  selector:
+    app: books
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5000
+  type: NodePort
+    

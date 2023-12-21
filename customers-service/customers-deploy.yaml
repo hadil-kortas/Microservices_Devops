@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: customers
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: customers
+  template:
+    metadata:
+      labels:
+        app: customers
+    spec:
+      containers:
+      - name: customers
+        image: hadilkortas/customers-service
+        ports:
+        - containerPort: 5001
