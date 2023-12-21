@@ -20,12 +20,13 @@ pipeline {
         }
         stage('Build'){
         steps {
-            sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/api-gateway:$BUILD_ID .'
-            sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/books-service:$BUILD_ID .'
-            sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/customers-service:$BUILD_ID .'
-            sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/orders-service:$BUILD_ID .'
+            sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/api-gateway:$BUILD_ID -f api-gateway/Dockerfile .'
+            sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/books-service:$BUILD_ID -f books-service/to/Dockerfile .'
+            sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/customers-service:$BUILD_ID -f customers-service/Dockerfile .'
+            sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/orders-service:$BUILD_ID -f orders-service/Dockerfile .'
         }
         }
+
         stage('Deliver'){
         steps {
             sh 'docker push $DOCKERHUB_CREDENTIALS_USR/api-gateway:$BUILD_ID'
