@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: customers-nodeport
+  labels:
+      app: customers
+spec:
+  selector:
+    app: customers
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 5001
+  type: NodePort
+    
