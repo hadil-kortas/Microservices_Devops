@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway-charts
+  labels:
+    app: api-gateway-charts
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: api-gateway-charts
+  template:
+    metadata:
+      annotations:
+      labels:
+        app: api-gateway-charts
+    spec:
+      imagePullSecrets:
+        
+      serviceAccountName:
+      securityContext:
+      
+      containers:
+        - name: api-gateway-charts
+          securityContext:
+        
+          image: hadilkortas/api-gateway
+          imagePullPolicy:
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            
+      
+      nodeSelector:
+        
+      
+      
+      affinity:
+        
+      tolerations:
+      
