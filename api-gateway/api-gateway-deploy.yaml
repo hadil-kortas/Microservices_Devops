@@ -14,6 +14,17 @@ spec:
     spec:
       containers:
       - name: api-gateway
-        image: hadilkortas/api-gateway
+        image: hadilkortas/api-gateway:latest
         ports:
-        - containerPort: 5003
+        - containerPort: 5004
+        env:
+          - name: NODE_ENV
+            value: "production"
+        readinessProbe:
+          httpGet:
+            path: /metrics
+            port: 5004
+        livenessProbe:
+          httpGet:
+            path: /metrics
+            port: 5004

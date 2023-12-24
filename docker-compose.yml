@@ -4,7 +4,7 @@ services:
   api-gateway:
     image: hadilkortas/api-gateway
     ports:
-      - "8081:5003"
+      - "8081:5004"
 
   books-service:
     image: hadilkortas/books-service

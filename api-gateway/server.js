@@ -1,5 +1,8 @@
 const express = require('express');
 const { createProxyMiddleware } = require('http-proxy-middleware');
+const prom = require('prom-client')
+const collectDefaultMetrics = prom.collectDefaultMetrics();
+const app = express();
 
 // define routes and their ports 
 const routes = {
@@ -9,20 +12,31 @@ const routes = {
 };
 
 // create a proxy for each route 
-const app = express();
+
 for(const route in routes){
     const target = routes[route];
     app.use(route, createProxyMiddleware({target}));
 }
+
 
 // handler for the root endpoint
 app.get('/', (req, res) => {
     res.send('Welcome to the API Gateway!');
 });
 
+app.get('/metrics', async (req, res) => {
+    try {
+        res.set('Content-Type', prom.register.contentType);
+        res.end(await prom.register.metrics());
+    } 
+    catch (ex) {
+        res.status(500).end(ex);
+    }
+  });
+
 
 // start the proxy
-const PORT = 5003;
+const PORT = 5004;
 app.listen(PORT, () => {
     console.log(`Api-gateway server listening on port ${PORT}`);
 }
