@@ -11,20 +11,14 @@ spec:
     metadata:
       labels:
         app: api-gateway
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/path: "/metrics"
+        prometheus.io/port: "5004"
     spec:
       containers:
       - name: api-gateway
         image: hadilkortas/api-gateway:latest
         ports:
         - containerPort: 5004
-        env:
-          - name: NODE_ENV
-            value: "production"
-        readinessProbe:
-          httpGet:
-            path: /metrics
-            port: 5004
-        livenessProbe:
-          httpGet:
-            path: /metrics
-            port: 5004
+        
