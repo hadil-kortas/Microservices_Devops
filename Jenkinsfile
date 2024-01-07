@@ -27,12 +27,18 @@ pipeline {
             }
         }
 
+        stage('Debug') {
+            steps {
+                sh 'ls -la'
+            }
+        }
+
         stage('Test') {
             steps {
-                sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/api-gateway:$BUILD_ID npm test -- --debug'
-                sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/books-service:$BUILD_ID npm test -- --debug'
-                sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/customers-service:$BUILD_ID npm test -- --debug'
-                sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/orders-service:$BUILD_ID npm test -- --debug'
+                sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/api-gateway:$BUILD_ID npm test ./api-gateway'
+                sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/books-service:$BUILD_ID npm test ./books-service'
+                sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/customers-service:$BUILD_ID npm test ./customers-service'
+                sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/orders-service:$BUILD_ID npm test ./orders-service'
                 
             }
         }
