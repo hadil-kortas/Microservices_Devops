@@ -7,7 +7,10 @@ COPY package*.json ./
 RUN npm install
 
 COPY . .
+COPY test ./test
 
 EXPOSE 5000
+
+RUN npm test
 
 CMD ["node", "server.js"]

@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('./server');
+const app = require('../server');
 
 describe('Customers Service Tests', () => {
   beforeAll(async () => {
@@ -18,8 +18,8 @@ describe('Customers Service Tests', () => {
 
   test('POST /customer should add a new customer', async () => {
     const newCustomer = {
-      name: 'New Customer',
-      email: 'newcustomer@example.com',
+      name: 'New Customer4',
+      email: 'newcustomer4@example.com',
       phone: '123-456-7890',
     };
 

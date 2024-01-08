@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('./server'); 
+const app = require('../server'); 
 
 describe('API Gateway Tests', () => {
   test('GET / should return welcome message', async () => {

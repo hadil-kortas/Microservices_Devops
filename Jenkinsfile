@@ -20,6 +20,7 @@ pipeline {
         }
         stage('Build') {
             steps {
+                
                 sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/api-gateway:$BUILD_ID -f api-gateway/Dockerfile ./api-gateway'
                 sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/books-service:$BUILD_ID -f books-service/Dockerfile .'
                 sh 'docker build -t $DOCKERHUB_CREDENTIALS_USR/customers-service:$BUILD_ID -f customers-service/Dockerfile .'
@@ -35,10 +36,16 @@ pipeline {
 
         stage('Test') {
             steps {
-                sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/api-gateway:$BUILD_ID npm test ./api-gateway'
-                sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/books-service:$BUILD_ID npm test ./books-service'
-                sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/customers-service:$BUILD_ID npm test ./customers-service'
-                sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/orders-service:$BUILD_ID npm test ./orders-service'
+                
+                    
+                    sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/api-gateway:$BUILD_ID npm test'
+                   
+                    sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/books-service:$BUILD_ID npm test'
+                    
+                    sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/customers-service:$BUILD_ID npm test'
+                    
+                    sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/orders-service:$BUILD_ID npm test'
+                }
                 
             }
         }

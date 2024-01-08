@@ -1,5 +1,5 @@
 const request = require('supertest');
-const app = require('./server');
+const app = require('../server');
 
 describe('Book Service Tests', () => {
   beforeAll(async () => {
@@ -18,8 +18,8 @@ describe('Book Service Tests', () => {
 
   test('POST /book should add a new book', async () => {
     const newBook = {
-      title: 'Book',
-      author: 'Name',
+      title: 'Book2',
+      author: 'Name2',
       publicationYear: 2022,
     };
 

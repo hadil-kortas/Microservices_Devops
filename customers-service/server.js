@@ -72,10 +72,13 @@ app.delete('/customer/:id', (req, res) => {
   });
 });
 
-// Lancement du serveur
-const server = app.listen(port, () => {
-  console.log(`Serveur démarré sur le port ${port}.`);
-});
+// Check if the server is being run in a test environment before logging
+if (process.env.NODE_ENV !== 'test') {
+  // Lancement du serveur
+  app.listen(port, () => {
+    console.log(`Serveur démarré sur le port ${port}.`);
+  });
+}
 
 // Exporte l'application pour les tests
-module.exports = server;
+module.exports = app;
