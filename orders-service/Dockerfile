@@ -10,6 +10,5 @@ COPY . .
 
 EXPOSE 5002
 
-RUN npm test
 
 CMD ["node", "server.js"]

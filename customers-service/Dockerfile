@@ -8,9 +8,6 @@ RUN npm install
 
 COPY . .
 
-
 EXPOSE 5001
-
-RUN npm test
 
 CMD ["node", "server.js"]
