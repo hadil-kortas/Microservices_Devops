@@ -39,16 +39,12 @@ pipeline {
                 
                     
                     sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/api-gateway:$BUILD_ID npm test'
-                   
                     sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/books-service:$BUILD_ID npm test'
-                    
                     sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/customers-service:$BUILD_ID npm test'
-                    
                     sh 'docker run --rm $DOCKERHUB_CREDENTIALS_USR/orders-service:$BUILD_ID npm test'
                 }
                 
             }
-        }
 
         stage('Deliver') {
             steps {
