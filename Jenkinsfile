@@ -34,6 +34,18 @@ pipeline {
             }
         }
 
+        stage('Test') {
+            steps {
+                sh 'cd api-gateway && npm install && npm test'
+                sh 'cd books-service && npm install && npm test'
+                sh 'cd customers-service && npm install && npm test'
+                sh 'cd orders-service && npm install && npm test'
+
+                }
+                
+            }
+        }
+
     
 
         stage('Deliver') {
