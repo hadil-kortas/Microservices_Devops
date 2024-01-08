@@ -36,6 +36,8 @@ pipeline {
 
         stage('Test') {
             steps {
+                sh 'nvm install 14'
+                sh 'nvm use 14'
                 sh 'cd api-gateway && npm install && npm test'
                 sh 'cd books-service && npm install && npm test'
                 sh 'cd customers-service && npm install && npm test'
