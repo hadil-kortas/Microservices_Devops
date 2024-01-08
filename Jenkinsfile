@@ -34,17 +34,7 @@ pipeline {
             }
         }
 
-        stage('Test') {
-            steps {
-                
-                    
-                    //sh 'npm test -f api-gateway/test/server.test.js'
-                    //sh 'npm test -f books-service/test/server.test.js'
-                    //sh 'npm test -f customers-service/test/server.test.js'
-                    //sh 'npm test -f orders-service/test/server.test.js'
-                }
-                
-            }
+    
 
         stage('Deliver') {
             steps {
