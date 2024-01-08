@@ -33,13 +33,7 @@ pipeline {
                 sh 'ls -la'
             }
         }
-
-        stage('Test') {
-    
-            
-        }
  
-
         stage('Deliver') {
             steps {
                 sh 'docker push $DOCKERHUB_CREDENTIALS_USR/api-gateway:$BUILD_ID'
